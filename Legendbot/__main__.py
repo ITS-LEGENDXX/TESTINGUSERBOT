@@ -6,11 +6,11 @@ from Legendbot import BOTLOG_CHATID, PM_LOGGER_GROUP_ID
 from .Config import Config
 from .core.logger import logging
 from .core.session import legend
-from .start import killer
+
 from .utils import (
     add_bot_to_logger_group,
-    hekp,
-    install_extrarepo,
+
+    
     load_plugins,
     setup_bot,
     startupmessage,
@@ -25,11 +25,7 @@ print("Licensed under the terms of the " + Legendbot.__license__)
 cmdhr = Config.HANDLER
 
 
-async def extrarepo():
-    if Config.EXTRA_REPO:
-        await install_extrarepo(
-            Config.EXTRA_REPO, Config.EXTRA_REPOBRANCH, "xtraplugins"
-        )
+
 
 
 try:
@@ -45,8 +41,6 @@ async def startup_process():
     try:
         await verifyLoggerGroup()
         await load_plugins("plugins")
-        await load_plugins("assistant")
-        await killer()
         print("----------------")
         print("Starting Bot Mode!")
         print("⚜ LegendBot Has Been Deployed Successfully ⚜")
@@ -58,8 +52,7 @@ async def startup_process():
         if PM_LOGGER_GROUP_ID != -100:
             await add_bot_to_logger_group(PM_LOGGER_GROUP_ID)
         await startupmessage()
-        await extrarepo()
-        await hekp()
+    
     except Exception as e:
         LOGS.error(f"{str(e)}")
         sys.exit()
